@@ -1,0 +1,117 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Documentation</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.8.0/github-markdown.min.css" integrity="sha256-Lt9340Td+22fUGyXnrvSDEy9lnZunEDDyYyQ3QOGgeg=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" integrity="sha256-3YM6A3pH4QFCl9WbSU8oXF5N6W/2ylvW0o2g+Z6TmLQ=" crossorigin="anonymous" />
+    <style>
+      .markdown-body {
+        box-sizing: border-box;
+        min-width: 200px;
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 15px;
+      }
+
+      @media (max-width: 767px) {
+        .markdown-body {
+          padding: 5px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+     <div class="markdown-body">
+      <h2>Azure Media Services Subclipper editor - Render output contract</h2>
+<p>The job output contract for a render sub-clipping is a JSON object with the following properties:</p>
+<pre><code class="language-js">{
+  <span class="hljs-comment">/* Required */</span>
+  <span class="hljs-string">"name"</span>: <span class="hljs-string">"My New Subclip Output Name"</span>,
+
+  <span class="hljs-comment">/* Required: array containing all the input Ids (both "asset" or "filter" type) used in the subclipper timeline; 
+  it must contain at least one item. */</span>
+  <span class="hljs-comment">/* <span class="hljs-doctag">NOTE:</span> when "output"."type" === "job", all items must match the "inputsIds"[i]."type" === "asset" condition; 
+  this array can be used in the back-end to get the input assets for the subclipping job with the Media Encoder Standard (MES) processor. */</span>
+  <span class="hljs-comment">/* <span class="hljs-doctag">NOTE:</span> when "output"."type" === "filter", there must be a single item in the array ("inputsIds".length === 1) 
+  that can be used in the back-end to get the source for the dynamic manifest filter (create or update). */</span>
+  <span class="hljs-string">"inputsIds"</span>: [{
+    <span class="hljs-comment">/* Required */</span>
+    <span class="hljs-string">"id"</span>: <span class="hljs-string">"my-asset-id-1"</span>,
+
+    <span class="hljs-comment">/* Required: must be one of the following values: "asset" or "filter" */</span>
+    <span class="hljs-string">"type"</span>: <span class="hljs-string">"asset"</span>
+  }, {
+    <span class="hljs-comment">/* Required */</span>
+    <span class="hljs-string">"id"</span>: <span class="hljs-string">"my-asset-id-2"</span>,
+
+    <span class="hljs-comment">/* Required: must be one of the following values: "asset" or "filter" */</span>
+    <span class="hljs-string">"type"</span>: <span class="hljs-string">"asset"</span>
+  }],
+
+  <span class="hljs-comment">/* Required */</span>
+  <span class="hljs-string">"output"</span>: {
+
+    <span class="hljs-comment">/* Required: must be one of the following values: "job" or "filter" */</span>
+    <span class="hljs-string">"type"</span>: <span class="hljs-string">"job"</span>,
+
+    <span class="hljs-comment">/* Required if "type" === "job" */</span>
+    <span class="hljs-comment">/* <span class="hljs-doctag">NOTE:</span> This is the preset for the Media Encoder Standard (MES) processor that can be used in the back-end to sumit the subclip job. 
+    The encoding profile ("Codecs" property) depends on the "singleBitrateMp4Profile" and "multiBitrateMp4Profile" option parameters 
+    specified when creating the widget instance. */</span>
+    <span class="hljs-comment">/* REFERENCE: https://docs.microsoft.com/azure/media-services/media-services-advanced-encoding-with-mes */</span>
+    <span class="hljs-string">"job"</span>: {
+      <span class="hljs-string">"Version"</span>: <span class="hljs-number">1.0</span>,
+      <span class="hljs-string">"Codecs"</span>: [{
+          <span class="hljs-string">"KeyFrameInterval"</span>: <span class="hljs-string">"00:00:02"</span>,
+          <span class="hljs-string">"SceneChangeDetection"</span>: <span class="hljs-literal">true</span>,
+          <span class="hljs-string">"H264Layers"</span>: [{
+            <span class="hljs-string">"Profile"</span>: <span class="hljs-string">"Auto"</span>,
+            <span class="hljs-string">"Level"</span>: <span class="hljs-string">"auto"</span>,
+            <span class="hljs-string">"Bitrate"</span>: <span class="hljs-number">6750</span>,
+            <span class="hljs-string">"MaxBitrate"</span>: <span class="hljs-number">6750</span>,
+            <span class="hljs-string">"BufferWindow"</span>: <span class="hljs-string">"00:00:05"</span>,
+            <span class="hljs-string">"Width"</span>: <span class="hljs-number">1920</span>,
+            <span class="hljs-string">"Height"</span>: <span class="hljs-number">1080</span>,
+            <span class="hljs-string">"BFrames"</span>: <span class="hljs-number">3</span>,
+            <span class="hljs-string">"ReferenceFrames"</span>: <span class="hljs-number">3</span>,
+            <span class="hljs-string">"AdaptiveBFrame"</span>: <span class="hljs-literal">true</span>,
+            <span class="hljs-string">"Type"</span>: <span class="hljs-string">"H264Layer"</span>,
+            <span class="hljs-string">"FrameRate"</span>: <span class="hljs-string">"0/1"</span>
+          }],
+          <span class="hljs-string">"Type"</span>: <span class="hljs-string">"H264Video"</span>
+        },
+        {
+          <span class="hljs-string">"Profile"</span>: <span class="hljs-string">"AACLC"</span>,
+          <span class="hljs-string">"Channels"</span>: <span class="hljs-number">2</span>,
+          <span class="hljs-string">"SamplingRate"</span>: <span class="hljs-number">48000</span>,
+          <span class="hljs-string">"Bitrate"</span>: <span class="hljs-number">128</span>,
+          <span class="hljs-string">"Type"</span>: <span class="hljs-string">"AACAudio"</span>
+        }
+      ],
+      <span class="hljs-string">"Outputs"</span>: [{
+        <span class="hljs-string">"FileName"</span>: <span class="hljs-string">"{Basename}_{Width}x{Height}_{VideoBitrate}.mp4"</span>,
+        <span class="hljs-string">"Format"</span>: {
+          <span class="hljs-string">"Type"</span>: <span class="hljs-string">"MP4Format"</span>
+        }
+      }],
+      <span class="hljs-string">"Sources"</span>: [{
+        <span class="hljs-string">"AssetId"</span>: <span class="hljs-string">"my-asset-id-1"</span>,
+        <span class="hljs-string">"StartTime"</span>: <span class="hljs-string">"0.00:01:15.000"</span>,
+        <span class="hljs-string">"Duration"</span>: <span class="hljs-string">"0.00:00:25.000"</span>
+      }, {
+        <span class="hljs-string">"AssetId"</span>: <span class="hljs-string">"my-asset-id-2"</span>,
+        <span class="hljs-string">"StartTime"</span>: <span class="hljs-string">"0.00:20:04.000"</span>,
+        <span class="hljs-string">"Duration"</span>: <span class="hljs-string">"0.00:33:07.500"</span>
+      }]
+    }
+  }
+}
+</code></pre>
+
+    </div>
+  </body>
+</html>

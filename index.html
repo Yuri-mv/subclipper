@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Latest Widget test</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/please-wait/0.0.5/please-wait.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/spinkit/1.2.5/spinners/3-wave.min.css"
+    />
+    <link
+      href="//amp.azure.net/libs/amp/2.1.1/skins/amp-default/azuremediaplayer.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    />
+    <link href="css/subclipper.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <!-- Navigation bar -->
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button
+            type="button"
+            class="navbar-toggle collapsed"
+            data-toggle="collapse"
+            data-target="#navbar"
+            aria-expanded="false"
+            aria-controls="navbar"
+          >
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#"
+            >Azure Media Player - Subclipper (<span id="sample-title"></span
+            >)</a
+          >
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a href="/releases" class="btn-lg" target="_blank">
+                <span class="sr-only">Download releases</span>
+                <span
+                  class="glyphicon glyphicon-download"
+                  title="Download releases"
+                  aria-hidden="true"
+                ></span>
+              </a>
+            </li>
+            <li>
+              <a href="readme.html" class="btn-lg" target="_blank">
+                <span class="sr-only">Help</span>
+                <span
+                  class="glyphicon glyphicon-question-sign"
+                  title="Documentation"
+                  aria-hidden="true"
+                ></span>
+              </a>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a
+                href="#"
+                class="dropdown-toggle"
+                data-toggle="dropdown"
+                role="button"
+                aria-haspopup="true"
+                aria-expanded="false"
+                >Live samples<span class="caret"></span
+              ></a>
+              <ul class="dropdown-menu" id="samples-menu">
+                <li
+                  id="assetsPaneExample"
+                  onclick="loadExample('assetsPaneExample')"
+                >
+                  <a href="#">Assets pane</a>
+                </li>
+                <li
+                  id="assetsPaneCustomSingleMP4ProfileExample"
+                  onclick="loadExample('assetsPaneCustomSingleMP4ProfileExample')"
+                >
+                  <a href="#"
+                    >Assets pane with custom single bitrate MP4 profile</a
+                  >
+                </li>
+                <li
+                  id="assetsPaneWithoutTypeFiltersExample"
+                  onclick="loadExample('assetsPaneWithoutTypeFiltersExample')"
+                >
+                  <a href="#">Assets pane without types filtering</a>
+                </li>
+                <li
+                  id="assetsPaneCleanExample"
+                  onclick="loadExample('assetsPaneCleanExample')"
+                >
+                  <a href="#">Assets pane with reset on submit option</a>
+                </li>
+                <li
+                  id="assetsPaneThreeMinuteGap"
+                  onclick="loadExample('assetsPaneThreeMinuteGap')"
+                >
+                  <a href="#"
+                    >Assets pane with clip duration of minimum 3 minutes
+                  </a>
+                </li>
+                <li role="separator" class="divider"></li>
+                <li
+                  id="oneSourceDynamicExample"
+                  onclick="loadExample('oneSourceDynamicExample')"
+                >
+                  <a href="#">One source loaded dynamically</a>
+                </li>
+                <li
+                  id="twoSourcesDynamicExample"
+                  onclick="loadExample('twoSourcesDynamicExample')"
+                >
+                  <a href="#">Two sources loaded dynamically</a>
+                </li>
+                <li
+                  id="oneSourceWithGapDynamicExample"
+                  onclick="loadExample('oneSourceWithGapDynamicExample')"
+                >
+                  <a href="#"
+                    >One source loaded dynamically with a 15 seconds minimum
+                    clip size</a
+                  >
+                </li>
+                <li
+                  id="twoSourcesRenderOutputDynamicExample"
+                  onclick="loadExample('twoSourcesRenderOutputDynamicExample')"
+                >
+                  <a href="#"
+                    >Two sources loaded dynamically only render output
+                    allowed</a
+                  >
+                </li>
+                <li
+                  id="oneSourceFilterOutputDynamicExample"
+                  onclick="loadExample('oneSourceFilterOutputDynamicExample')"
+                >
+                  <a href="#"
+                    >One source loaded dynamically only dynamic manifest output
+                    allowed</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li
+              id="select-light-skin"
+              onclick="updateSkin(true)"
+              class="active"
+            >
+              <a href="#">Light skin</a>
+            </li>
+            <li id="select-dark-skin" onclick="updateSkin(false)">
+              <a href="#">Dark skin</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Body -->
+    <div class="container-fluid" style="height: 92vh">
+      <!-- Subclipper root container -->
+      <!-- Added height: 100% to ocuppy the full container height -->
+      <div id="subclipper" class="azure-subclipper" style="height: 100%"></div>
+    </div>
+    <!-- Job output modal -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="output-modal">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" id="html-output"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Required scripts -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/please-wait/0.0.5/please-wait.min.js"></script>
+    <script>
+      window.loading_screen = pleaseWait({
+        logo: "",
+        backgroundColor: "#1F1A1A",
+        loadingHtml:
+          '<div class="sk-wave"><div class="sk-rect sk-rect1" style="background: #fff"></div><div style="background: #fff" class="sk-rect sk-rect2"></div><div style="background: #fff" class="sk-rect sk-rect3"></div><div style="background: #fff" class="sk-rect sk-rect4"></div><div style="background: #fff" class="sk-rect sk-rect5"></div></div>',
+      });
+    </script>
+    <script src="//amp.azure.net/libs/amp/2.1.1/azuremediaplayer.min.js"></script>
+    <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- Helpers and sample sources -->
+    <script src="helpers.js"></script>
+    <script src="samples/input-sources.js"></script>
+    <!-- Samples -->
+    <script src="samples/assets-pane.js"></script>
+    <script src="samples/assets-pane-custom-mp4-profile.js"></script>
+    <script src="samples/assets-pane-without-type-filters.js"></script>
+    <script src="samples/one-source-dynamic.js"></script>
+    <script src="samples/two-sources-dynamic.js"></script>
+    <script src="samples/one-source-with-gap-dynamic.js"></script>
+    <script src="samples/two-sources-render-output-dynamic.js"></script>
+    <script src="samples/one-source-filter-output-dynamic.js"></script>
+    <script src="samples/assets-pane-clean.js"></script>
+    <script src="samples/assets-pane-gap-three-minute.js"></script>
+    <!-- End of Samples -->
+    <script>
+      var widget = null;
+
+      var onSubmitSubclip = function (subclip) {
+        var DUMMY_TIMEOUT = 2000;
+        return new Promise(function (resolve, reject) {
+          setTimeout(function () {
+            var prettyJson = JSON.stringify(JSON.parse(subclip), null, 2);
+            var textarea = $(
+              '<textarea style="width:100%;height:60vh;"></textarea>'
+            );
+            textarea.val(prettyJson);
+            $("#html-output").html("");
+            $("#html-output").append(textarea);
+            $("#output-modal").modal("show");
+            resolve();
+          }, DUMMY_TIMEOUT);
+        });
+      };
+
+      function updateSkin(useLight) {
+        if (useLight) {
+          $("#subclipper").removeClass("dark-skin");
+          $("#select-light-skin").addClass("active");
+          $("#select-dark-skin").removeClass("active");
+        } else {
+          $("#subclipper").addClass("dark-skin");
+          $("#select-light-skin").removeClass("active");
+          $("#select-dark-skin").addClass("active");
+        }
+      }
+
+      function loadExample(example) {
+        if (widget !== null) {
+          widget.dispose();
+          widget = null;
+        }
+        widget = window[example]();
+
+        $("#sample-title").text($("#" + example).text());
+        $("#samples-menu")
+          .children()
+          .each(function (index, elem) {
+            $(elem).removeClass("active");
+          });
+        $("#" + example).addClass("active");
+      }
+
+      $(document).ready(function () {
+        window.loading_screen.finish();
+        loadExample("assetsPaneExample");
+      });
+    </script>
+    <script type="text/javascript" src="js/subclipper.min.js"></script>
+  </body>
+</html>

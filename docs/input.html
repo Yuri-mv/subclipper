@@ -1,0 +1,101 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Documentation</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.8.0/github-markdown.min.css" integrity="sha256-Lt9340Td+22fUGyXnrvSDEy9lnZunEDDyYyQ3QOGgeg=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" integrity="sha256-3YM6A3pH4QFCl9WbSU8oXF5N6W/2ylvW0o2g+Z6TmLQ=" crossorigin="anonymous" />
+    <style>
+      .markdown-body {
+        box-sizing: border-box;
+        min-width: 200px;
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 15px;
+      }
+
+      @media (max-width: 767px) {
+        .markdown-body {
+          padding: 5px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+     <div class="markdown-body">
+      <h2>Azure Media Services Subclipper editor - Assets input contract</h2>
+<p>The input contract should be a JSON object with the following properties:</p>
+<pre><code class="language-js">{
+  <span class="hljs-comment">/* Required: represents the asset Id when "type" === "asset"; otherwise, represents the dynamic manifest asset filter Id ("type" === "filter")  */</span>
+  <span class="hljs-string">"id"</span>: <span class="hljs-string">"my-asset-or-dynamic-manifest-asset-filter-id"</span>,
+
+  <span class="hljs-comment">/* Required */</span>
+  <span class="hljs-string">"name"</span>: <span class="hljs-string">"My Asset or Dynamic Manifest Asset Filter Name"</span>,
+
+  <span class="hljs-comment">/* Required: must be one of the following values: "asset" or "filter" */</span>
+  <span class="hljs-comment">/* <span class="hljs-doctag">NOTE:</span> "asset" type represents a full asset; "filter" type represents a dynamic manifest asset filter. */</span>
+  <span class="hljs-string">"type"</span>: <span class="hljs-string">"asset"</span>,
+
+  <span class="hljs-comment">/* Required */</span>
+  <span class="hljs-string">"source"</span>: {
+
+    <span class="hljs-comment">/* Required: this is the base Smooth Streaming URL that AMP uses to build the different dynamic packaging URLs.*/</span>
+    <span class="hljs-string">"src"</span>: <span class="hljs-string">"//amssamples.streaming.mediaservices.windows.net/91492735-c523-432b-ba01-faba6c2206a2/AzureMediaServicesPromo.ism/manifest"</span>,
+
+    <span class="hljs-comment">/* Optional: default value "application/vnd.ms-sstr+xml" */</span>
+    <span class="hljs-string">"type"</span>: <span class="hljs-string">"application/vnd.ms-sstr+xml"</span>,
+
+    <span class="hljs-comment">/* Required: If the video has content protection, then it must include an array with the different protection types along with the token to request the license/key; otherwise, provide an empty array. */</span>
+    <span class="hljs-string">"protectionInfo"</span>: [{
+        <span class="hljs-string">"type"</span>: <span class="hljs-string">"AES"</span>,
+        <span class="hljs-string">"authenticationToken"</span>: <span class="hljs-string">"Bearer aes-token-placeholder"</span>
+      },
+      {
+        <span class="hljs-string">"type"</span>: <span class="hljs-string">"PlayReady"</span>,
+        <span class="hljs-string">"authenticationToken"</span>: <span class="hljs-string">"Bearer playready-token-placeholder"</span>
+      },
+      {
+        <span class="hljs-string">"type"</span>: <span class="hljs-string">"Widevine"</span>,
+        <span class="hljs-string">"authenticationToken"</span>: <span class="hljs-string">"Bearer widevine-token-placeholder"</span>
+      },
+      {
+        <span class="hljs-string">"type"</span>: <span class="hljs-string">"FairPlay"</span>,
+        <span class="hljs-string">"certificateUrl"</span>: <span class="hljs-string">"//example/path/to/myfairplay.der"</span>,
+        <span class="hljs-string">"authenticationToken"</span>: <span class="hljs-string">"Bearer fairplay-token-placeholder"</span>
+      }
+    ]
+  },
+
+  <span class="hljs-comment">/* Optional: array containing thumbnail URLs for the video. */</span>
+  <span class="hljs-comment">/* <span class="hljs-doctag">NOTE:</span> For the thumbnail URLs to work as expected in the subclipper timeline they must be evenly distributed across the video (based on the duration) and in chronological order within the array. */</span>
+  <span class="hljs-string">"thumbnails"</span>: [
+    <span class="hljs-string">"//example/path/thumbnail_001.jpg"</span>,
+    <span class="hljs-string">"//example/path/thumbnail_002.jpg"</span>,
+    <span class="hljs-string">"//example/path/thumbnail_003.jpg"</span>,
+    <span class="hljs-string">"//example/path/thumbnail_004.jpg"</span>,
+    <span class="hljs-string">"//example/path/thumbnail_005.jpg"</span>
+  ]
+}
+</code></pre>
+<p><strong>Note:</strong> For the thumbnail URLs to work as expected in the subclipper timeline they must be evenly distributed across the video (based on the duration) and in chronological order within the array. You can use the following JSON preset snippet as a sample reference for generating images with the 'Media Encoder Standard' processor:</p>
+<pre><code class="language-json">{
+  <span class="hljs-attr">"Start"</span>: <span class="hljs-string">"0"</span>,
+  <span class="hljs-attr">"Step"</span>: <span class="hljs-string">"00:00:05"</span>,
+  <span class="hljs-attr">"Range"</span>: <span class="hljs-string">"100%"</span>,
+  <span class="hljs-attr">"Type"</span>: <span class="hljs-string">"PngImage"</span>,
+  <span class="hljs-attr">"PngLayers"</span>: [
+    {
+      <span class="hljs-attr">"Type"</span>: <span class="hljs-string">"PngLayer"</span>,
+      <span class="hljs-attr">"Width"</span>: <span class="hljs-number">48</span>,
+      <span class="hljs-attr">"Height"</span>: <span class="hljs-number">26</span>
+    }
+  ]
+}
+</code></pre>
+
+    </div>
+  </body>
+</html>

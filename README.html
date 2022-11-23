@@ -1,0 +1,174 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Documentation</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.8.0/github-markdown.min.css" integrity="sha256-Lt9340Td+22fUGyXnrvSDEy9lnZunEDDyYyQ3QOGgeg=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" integrity="sha256-3YM6A3pH4QFCl9WbSU8oXF5N6W/2ylvW0o2g+Z6TmLQ=" crossorigin="anonymous" />
+    <style>
+      .markdown-body {
+        box-sizing: border-box;
+        min-width: 200px;
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 15px;
+      }
+
+      @media (max-width: 767px) {
+        .markdown-body {
+          padding: 5px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+     <div class="markdown-body">
+      <h1>Azure Media Services Subclipper editor</h1>
+<h2>Table of contents</h2>
+<ol>
+<li><a href="#gettingstarted">Getting started</a>
+<ol>
+<li><a href="#install">Install</a></li>
+<li><a href="#initialize">Initialize</a></li>
+<li><a href="#api">API</a></li>
+<li><a href="#localization">Localization</a></li>
+</ol>
+</li>
+<li><a href="docs/changelog.html">Change log</a></li>
+<li><a href="docs/known-issues.html">Known issues</a></li>
+<li><a href="docs/develop.html">Develop</a></li>
+</ol>
+<p><a name="gettingstarted"></a></p>
+<h2>Getting started</h2>
+<p>The Azure Media Services Subclipper editor is a JavaScript widget to be embedded inside your existing Websites.</p>
+<p>The Subclipper widget is inteded to run on:</p>
+<ul>
+<li>IE 11</li>
+<li>Edge (13 and up)</li>
+<li>Chrome (54 and up)</li>
+<li>Safari (10 and up)</li>
+<li>Firefox (50 and up)</li>
+</ul>
+<p>Note: Only HTML5 is supported for the Media Player, nor Flash and Silverlight will work.</p>
+<p><a name="install"></a></p>
+<h3>Install</h3>
+<p>From CDN:</p>
+<pre><code class="language-html"><span class="hljs-comment">&lt;!-- The Azure Media Player is a pre-requisite at least version 2.1.0 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"//amp.azure.net/libs/amp/2.1.0/skins/amp-default/azuremediaplayer.min.css"</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">"stylesheet"</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"//amp.azure.net/libs/amp/2.1.0/azuremediaplayer.min.js"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-comment">&lt;!-- Subclipper scripts and stypes --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"css/subclipper.css"</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">"stylesheet"</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"js/subclipper.min.js"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre>
+<p><a name="initialize"></a></p>
+<h3>Initialize</h3>
+<h4>HTML</h4>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"root"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"azure-subclipper"</span> /&gt;</span>
+</code></pre>
+<p>To use dark skin add <strong>dark-skin</strong> to the class attribute:</p>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"root"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"azure-subclipper dark-skin"</span> /&gt;</span>
+</code></pre>
+<h4>JavaScript</h4>
+<pre><code class="language-js"><span class="hljs-keyword">var</span> subclipper = <span class="hljs-keyword">new</span> subclipper({
+    <span class="hljs-attr">selector</span>: <span class="hljs-string">'#root'</span>,
+    <span class="hljs-attr">logLevel</span>: <span class="hljs-string">'info'</span>,
+    <span class="hljs-attr">restVersion</span>: <span class="hljs-string">'2.0'</span>,
+    <span class="hljs-attr">minimumMarkerGap</span>: <span class="hljs-number">6</span>,
+    <span class="hljs-attr">submitSubclipCallback</span>: onSubmitSubclip,
+    <span class="hljs-attr">singleBitrateMp4Profile</span>: {
+            <span class="hljs-attr">Codecs</span>: [{
+                    <span class="hljs-comment">// Video Codec with single H264Layers</span>
+                }, {
+                    <span class="hljs-comment">// Audio Codec</span>
+                }]
+    },
+    <span class="hljs-attr">multiBitrateMp4Profile</span>: {
+            <span class="hljs-attr">Codecs</span>: [{
+                    <span class="hljs-comment">// Video Codec with multiple H264Layers</span>
+                }, {
+                    <span class="hljs-comment">// Audio Codec</span>
+                }]
+    },
+    <span class="hljs-attr">keymap</span>: {
+      <span class="hljs-comment">// See below for more info</span>
+    },
+   <span class="hljs-comment">// Enable the Video Assets panel in the widget to automatically load assets (input contract)</span>
+    <span class="hljs-attr">assetsPanelLoaderCallback</span>: onLoadAssets,
+    <span class="hljs-attr">height</span>: <span class="hljs-number">600</span>,
+    <span class="hljs-attr">subclippingMode</span>: <span class="hljs-string">'all'</span>,
+    <span class="hljs-attr">filterAssetsTypes</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">speedLevels</span>: [
+        { <span class="hljs-attr">name</span>: <span class="hljs-string">'4x'</span>, <span class="hljs-attr">value</span>: <span class="hljs-number">4.0</span> },
+        { <span class="hljs-attr">name</span>: <span class="hljs-string">'3x'</span>, <span class="hljs-attr">value</span>: <span class="hljs-number">3.0</span> },
+        { <span class="hljs-attr">name</span>: <span class="hljs-string">'2x'</span>, <span class="hljs-attr">value</span>: <span class="hljs-number">2.0</span> },
+        { <span class="hljs-attr">name</span>: <span class="hljs-string">'normal'</span>, <span class="hljs-attr">value</span>: <span class="hljs-number">1.0</span> },
+        { <span class="hljs-attr">name</span>: <span class="hljs-string">'0.75x'</span>, <span class="hljs-attr">value</span>: <span class="hljs-number">0.75</span> },
+        { <span class="hljs-attr">name</span>: <span class="hljs-string">'0.5x'</span>, <span class="hljs-attr">value</span>: <span class="hljs-number">0.5</span> },
+    ], 
+    <span class="hljs-attr">resetOnJobDone</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-attr">autoplayVideo</span>: <span class="hljs-literal">true</span>,
+});
+</code></pre>
+<p>Parameters:</p>
+<ul>
+<li><strong>selector {REQUIRED, string}</strong>: CSS selector of the matching HTML element where the widget should be rendered.</li>
+<li><strong>logLevel {OPTIONAL, {'info', 'warn', 'error'}}</strong>: The logging level to be displayed in the browser’s console. Default value: <strong>error</strong>.</li>
+<li><strong>restVersion {REQUIRED, string}</strong>: The Azure Media Services REST API version to target. This defines the format of the output generated by the widget. Currently, only <strong>2.0</strong> is supported.</li>
+<li><strong>minimumMarkerGap {OPTIONAL, string}</strong>: The minimum size of a sub-clip (in seconds). <strong>Note:</strong> the value should be greater or equal to <strong>6</strong>, which is also the default.</li>
+<li><strong>submitSubclipCallback {REQUIRED, promise}</strong> The callback function invoked when the &quot;submit&quot; button of the widget is clicked. The callback function should expect the output generated by the widget (a render job configuration or a filter definition). For more details, see <a href="docs/submit-callback.html">Submit sub-clip callback</a>.</li>
+<li><strong>singleBitrateMp4Profile {OPTIONAL, JSON object}</strong> The single bitrate MP4 profile to use for the render job configuration generated by the widget. If not provided, it will use the default <a href="https://docs.microsoft.com/azure/media-services/media-services-mes-preset-h264-single-bitrate-1080p">Single-bitrate MP4</a> profile.</li>
+<li><strong>multiBitrateMp4Profile {OPTIONAL, JSON object}</strong> The multi bitrate mp4 profile to use for render job configuration generated by the widget. If not provided, it will use the default <a href="https://docs.microsoft.com/azure/media-services/media-services-mes-preset-h264-multiple-bitrate-1080p">Multi-bitrate MP4</a> profile.</li>
+<li><strong>keymap {OPTIONAL, json object}</strong> Allows customizing the keyboard shortcuts of the widget. For more details, see  <a href="docs/keymaps.html">Customizable keymaps</a>.</li>
+<li><strong>assetsPanelLoaderCallback {OPTIONAL, promise}</strong> The callback function invoked to load (asynchronously) a new page of assets into the assets pane every time the user scrolls down to the bottom of the pane. For more details, see <a href="docs/assets-pane-callback.html">Asset pane loader callback</a>.</li>
+<li><strong>height {OPTIONAL, number}</strong> The total height of the widget (minimum height is 600px without assets pane, and 850px with the assets pane).</li>
+<li><strong>subclippingMode (OPTIONAL, {'all', 'render', 'filter'})</strong>: The sub-clipping mode(s) allowed. The default value is <strong>all</strong>.</li>
+<li><strong>filterAssetsTypes (OPTIONAL, bool)</strong>: Allows to show/hide the filters dropdown from the assets pane. The default value is <strong>true</strong>.</li>
+<li><strong>speedLevels (OPTIONAL, array)</strong>: Allows setting different speed levels for the video player, see video player <a href="http://amp.azure.net/libs/amp/latest/docs/#amp.player.playbackspeedoptions">documentation</a> for more info.</li>
+<li><strong>resetOnJobDone (OPTIONAL, bool)</strong>: Allows to reset the subclipper to a initial state when a job is submitted successfully.</li>
+<li><strong>autoplayVideo (OPTIONAL, bool)</strong>: Allows to autoplay the video on load. The default value is <strong>true</strong>.</li>
+</ul>
+<p>A <a href="https://www.typescriptlang.org/">TypeScript</a> definition file can be found <a href="docs/subclipper.d.ts">here</a>.</p>
+<p><a name="api"></a></p>
+<h3>API</h3>
+<ul>
+<li>
+<p><strong>load(assets)</strong>: Loads a list of <a href="docs/input.html">assets</a> into the assets pane (should not be used together with <strong>assetsPanelLoaderCallback</strong>).</p>
+</li>
+<li>
+<p><strong>setLanguage(language)</strong>: Sets the widget’s language if available. Otherwise, it fallbacks to English (<strong>en</strong>).</p>
+</li>
+</ul>
+<pre><code class="language-js">subclipper.setLanguage(<span class="hljs-string">'es'</span>);
+</code></pre>
+<ul>
+<li><strong>setLogLevel(level)</strong>: Sets the logging level to be displayed in the browser’s console. Possible values are: <em><strong>info,warn,error</strong></em>.</li>
+</ul>
+<pre><code class="language-js">subclipper.setLogLevel(<span class="hljs-string">'warn'</span>);
+</code></pre>
+<ul>
+<li><strong>setHeight(height)</strong>: Sets the total height of the widget (minimum height is 600px without assets pane, and 850px with the assets pane).</li>
+</ul>
+<pre><code class="language-js">subclipper.setHeight(<span class="hljs-number">700</span>);
+</code></pre>
+<ul>
+<li><strong>version</strong>: Gets the widget version.</li>
+</ul>
+<pre><code class="language-js">subclipper.version
+</code></pre>
+<p><a name="localization"></a></p>
+<h3>Localization</h3>
+<p>The <strong>subclipper</strong> Messages and labels of the Subclipper widget are only available in <strong>English</strong>. Localization of the widget can be customized by creating a <code>window.subclipper.messages</code> object containing all the string resources for each supported language. Use the <a href="js/locales.js">default locales object</a> of the widget as a baseline to create your own locales.</p>
+<pre><code class="language-js">    <span class="hljs-built_in">window</span>.subclipper.messages = {
+        <span class="hljs-attr">en</span>: { <span class="hljs-comment">// This is the language id</span>
+            <span class="hljs-string">"example.id"</span> : <span class="hljs-string">"Message"</span> <span class="hljs-comment">// Here lies all the messages</span>
+        }
+    }
+</code></pre>
+<p><strong>Note:</strong> If the widget can't find a string resource for the configured language, it will fall back to English.</p>
+
+    </div>
+  </body>
+</html>

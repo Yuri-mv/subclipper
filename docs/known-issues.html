@@ -1,0 +1,40 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Documentation</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.8.0/github-markdown.min.css" integrity="sha256-Lt9340Td+22fUGyXnrvSDEy9lnZunEDDyYyQ3QOGgeg=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" integrity="sha256-3YM6A3pH4QFCl9WbSU8oXF5N6W/2ylvW0o2g+Z6TmLQ=" crossorigin="anonymous" />
+    <style>
+      .markdown-body {
+        box-sizing: border-box;
+        min-width: 200px;
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 15px;
+      }
+
+      @media (max-width: 767px) {
+        .markdown-body {
+          padding: 5px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+     <div class="markdown-body">
+      <h2>Azure Media Services Subclipper editor - Known issues</h2>
+<ul>
+<li>The next/previous frame functionally for live sources does not work as expected when the archive window is full. This is due to a limitation of the seek operation of the AMP API – it will be fixed in a future version of AMP when the seek operation supports absolute times.</li>
+<li>When previewing a sub-clip, it never ends at the exact position due to design constraints of the AMP API.</li>
+<li>The frame by frame navigation feature sometimes does not work properly in Internet Explorer.</li>
+<li>Sometimes the assets pane calculated duration differs from the Azure Media Player duration.</li>
+<li>Sometimes if the video duration has decimal periods the AMP enters and endless loop and you can't set the playhead to the end.</li>
+</ul>
+
+    </div>
+  </body>
+</html>

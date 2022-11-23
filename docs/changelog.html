@@ -1,0 +1,202 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Documentation</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.8.0/github-markdown.min.css" integrity="sha256-Lt9340Td+22fUGyXnrvSDEy9lnZunEDDyYyQ3QOGgeg=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" integrity="sha256-3YM6A3pH4QFCl9WbSU8oXF5N6W/2ylvW0o2g+Z6TmLQ=" crossorigin="anonymous" />
+    <style>
+      .markdown-body {
+        box-sizing: border-box;
+        min-width: 200px;
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 15px;
+      }
+
+      @media (max-width: 767px) {
+        .markdown-body {
+          padding: 5px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+     <div class="markdown-body">
+      <h1>Changelog</h1>
+<p>All notable changes to this project will be documented in this file.</p>
+<p>The format is based on <a href="http://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>
+and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semantic Versioning</a>.</p>
+<h2>Unreleased</h2>
+<h2>Fixed</h2>
+<ul>
+<li>Fixed issue where the play window was not correctly calculated with Live videos.</li>
+</ul>
+<h2>1.3.15 - 2017-10-02</h2>
+<h2>Fixed</h2>
+<ul>
+<li>Fixed message error not shown when the asset could not be loaded due to missing tech.</li>
+</ul>
+<h2>1.3.14 - 2017-10-02</h2>
+<h2>Fixed</h2>
+<ul>
+<li>Fixed dynamically load several assets</li>
+</ul>
+<h2>1.3.13 - 2017-09-29</h2>
+<h2>Changed</h2>
+<ul>
+<li>Added tech order to the player</li>
+</ul>
+<h2>1.3.12 - 2017-09-29</h2>
+<h2>Fixed</h2>
+<ul>
+<li>Fixed issue where the live videos timestamp where not correctly calculated.</li>
+<li>Fixed zoom component not working as expected for live videos.</li>
+<li>Fixed reset/remove clip not working as expected for live videos.</li>
+</ul>
+<h2>1.3.11 - 2017-09-20</h2>
+<h2>Fixed</h2>
+<ul>
+<li>Fixed javascript error when keyframes where not loaded.</li>
+<li>Fixed timeline drag not working as expected when leaving the contained iframe.</li>
+<li>Fixed timeline transition issue when loading widget for the first time.</li>
+<li>Fixed play preview issues with multiple assets.</li>
+</ul>
+<h2>1.3.10 - 2017-09-18</h2>
+<h2>Fixed</h2>
+<ul>
+<li>Fixed shortcuts in IE 11.</li>
+<li>Fixed clip length when no mark in is set.</li>
+<li>Fixed pause issue on video player.</li>
+</ul>
+<h2>1.3.9 - 2017-09-15</h2>
+<h2>Changed</h2>
+<ul>
+<li>Changed frame rate dropdown to be always enabled.</li>
+</ul>
+<h2>1.3.8 - 2017-09-14</h2>
+<h2>Fixed</h2>
+<ul>
+<li>Fixed issue where the popups where not correctly aligned vertically.</li>
+</ul>
+<h2>1.3.7 - 2017-09-14</h2>
+<h2>Fixed</h2>
+<ul>
+<li>Fixed bug that allowed assets smaller than minimum marker gap to be dragged to the timeline.</li>
+<li>Fixed bug where the playhead was not set to the initial position on job reset.</li>
+<li>Fixed timeline ruler not showing timecodes after removing a filter.</li>
+<li>Fixed issue where advancing one at the end of the video, went back a few frames.</li>
+</ul>
+<h2>1.3.6 - 2017-09-08</h2>
+<h2>Fixed</h2>
+<ul>
+<li>Fixed spinner not working as expected in several use cases.</li>
+</ul>
+<h2>1.3.5 - 2017-09-08</h2>
+<h2>Added</h2>
+<ul>
+<li>Added setting to autoplay the video when loaded and updated <a href="../readme.html">documentation</a>. The default value is true.</li>
+</ul>
+<h2>Fixed</h2>
+<ul>
+<li>Fixed IE and Edge loading spinner not working.</li>
+<li>Fixed dropdown not working in IE.</li>
+</ul>
+<h2>1.3.4 - 2017-09-07</h2>
+<h2>Fixed</h2>
+<ul>
+<li>Asset names not aligned in assets pane when name is too long.</li>
+<li>Removed exclamation mark when the subclipper is initially loaded.</li>
+<li>Fixed issue where the playhead was not seeting in the neareast GOP.</li>
+</ul>
+<h2>1.3.3 - 2017-09-05</h2>
+<h2>Added</h2>
+<ul>
+<li>Added minimum clip duration constraint to assets pane.</li>
+</ul>
+<h2>Fixed</h2>
+<ul>
+<li>In IE 11 the playhead was not working.</li>
+<li>Play preview tooltip was not correctly aligned.</li>
+</ul>
+<h2>1.3.2 - 2017-08-31</h2>
+<h3>Changed</h3>
+<ul>
+<li>Changed submit job button to <em>Create filter</em> when in creating filter mode.</li>
+<li>Changed add button tooltip from assets pane for filters to &quot;Add filter to the timeline&quot;</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>Fixed pointer cursor not shown in add button of the assets pane.</li>
+</ul>
+<h2>1.3.1 - 2017-08-31</h2>
+<h3>Fixed</h3>
+<ul>
+<li>Fixed an issue where the subclipper assets pane is not refreshed after a job was submitted.</li>
+</ul>
+<h2>1.3.0 - 2017-08-30</h2>
+<h3>Added</h3>
+<ul>
+<li>Added setting to clean subclipper after job submitted.</li>
+</ul>
+<h2>1.2.5 - 2017-08-29</h2>
+<h3>Fixed</h3>
+<ul>
+<li>Fixed duration calculation for filters.</li>
+</ul>
+<h2>1.2.3 - 2017-08-29</h2>
+<h3>Changed</h3>
+<ul>
+<li>Updated localization strings so all starts with upper case.</li>
+</ul>
+<h2>1.2.2 - 2017-08-29</h2>
+<h3>Fixed</h3>
+<ul>
+<li>Fixed max shortcuts allowed.</li>
+</ul>
+<h2>1.2.1 - 2017-08-28</h2>
+<h3>Fixed</h3>
+<ul>
+<li>Fixed typo issue in typescript definition file.</li>
+</ul>
+<h2>1.2.0 - 2017-08-28</h2>
+<h3>Added</h3>
+<ul>
+<li>When there is an error loading an asset into the video player now we show an error an remove it from the sub clipper.</li>
+<li>Video player <a href="http://amp.azure.net/libs/amp/latest/docs/#amp.player.playbackspeedoptions">playback speeds</a>.</li>
+</ul>
+<h3>Changed</h3>
+<ul>
+<li>Updated subclipper TypeScript definition <a href="subclipper.d.ts">file</a>.</li>
+<li>Play/pause button now controls the play button of the video player and there is a new button in the command bar for play preview.</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>Fixed subclipping mode filter allowing the creation of rendered jobs.</li>
+<li>Fixed console error on subclipper dimensions update when the offset is not correctly calculated.</li>
+<li>Fixed filters duration not being calculated correctly in assets pane.</li>
+<li>Fixed <em>assests</em> typo in demo page.</li>
+</ul>
+<h2>1.1.1 - 2017-08-24</h2>
+<h3>Added</h3>
+<ul>
+<li>This changelog file</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>Fixed assets pane retry bar not showing correct styles in the retry button.</li>
+<li>Fix typo in output contracts for <a href="outputs/render.html">render</a> and <a href="outputs/filter.html">filter</a>: <strong>inputIds</strong> should read <strong>inputsIds</strong>.</li>
+<li>Fix wrong link in <a href="../readme.html">readme</a> for assets link.</li>
+</ul>
+<h2>1.1.0 - 2017-08-23</h2>
+<h3>Added</h3>
+<ul>
+<li>First beta version of the widget.</li>
+</ul>
+
+    </div>
+  </body>
+</html>

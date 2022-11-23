@@ -1,0 +1,120 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Documentation</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.8.0/github-markdown.min.css" integrity="sha256-Lt9340Td+22fUGyXnrvSDEy9lnZunEDDyYyQ3QOGgeg=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" integrity="sha256-3YM6A3pH4QFCl9WbSU8oXF5N6W/2ylvW0o2g+Z6TmLQ=" crossorigin="anonymous" />
+    <style>
+      .markdown-body {
+        box-sizing: border-box;
+        min-width: 200px;
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 15px;
+      }
+
+      @media (max-width: 767px) {
+        .markdown-body {
+          padding: 5px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+     <div class="markdown-body">
+      <h2>Azure Media Services Subclipper editor - Customizable keymaps</h2>
+<p>You can pass the following keymaps to the subclipper in the keymap config key and modify the keys as you see fit:</p>
+<pre><code class="language-json">{
+    <span class="hljs-attr">"AZURE_MEDIA_SERVICE_SUBCLIPPER"</span>: {
+        <span class="hljs-attr">"UNDO"</span>: {
+            <span class="hljs-attr">"windows"</span>: <span class="hljs-string">"ctrl+z"</span>,
+            <span class="hljs-attr">"osx"</span>: <span class="hljs-string">"command+z"</span>
+        },
+        <span class="hljs-attr">"REDO"</span>: {
+            <span class="hljs-attr">"windows"</span>: <span class="hljs-string">"ctrl+shift+z"</span>,
+            <span class="hljs-attr">"osx"</span>: <span class="hljs-string">"command+shift+z"</span>
+        },
+        <span class="hljs-attr">"MARK_IN"</span>: {
+            <span class="hljs-attr">"windows"</span>: <span class="hljs-string">"ctrl+i"</span>,
+            <span class="hljs-attr">"osx"</span>: <span class="hljs-string">"command+i"</span>
+        },
+        <span class="hljs-attr">"MARK_OUT"</span>: {
+            <span class="hljs-attr">"windows"</span>: <span class="hljs-string">"ctrl+o"</span>,
+            <span class="hljs-attr">"osx"</span>: <span class="hljs-string">"command+o"</span>
+        },
+        <span class="hljs-attr">"MARK_IN_INPUT"</span>: {
+            <span class="hljs-attr">"windows"</span>: <span class="hljs-string">"ctrl+alt+i"</span>,
+            <span class="hljs-attr">"osx"</span>: <span class="hljs-string">"command+alt+i"</span>
+        },
+        <span class="hljs-attr">"MARK_OUT_INPUT"</span>: {
+            <span class="hljs-attr">"windows"</span>: <span class="hljs-string">"ctrl+alt+o"</span>,
+            <span class="hljs-attr">"osx"</span>: <span class="hljs-string">"command+alt+o"</span>
+        },
+        <span class="hljs-attr">"PREV_FRAME"</span>: {
+            <span class="hljs-attr">"windows"</span>: <span class="hljs-string">"ctrl+left"</span>,
+            <span class="hljs-attr">"osx"</span>: <span class="hljs-string">"command+left"</span>
+        },
+        <span class="hljs-attr">"NEXT_FRAME"</span>: {
+            <span class="hljs-attr">"windows"</span>: <span class="hljs-string">"ctrl+right"</span>,
+            <span class="hljs-attr">"osx"</span>: <span class="hljs-string">"command+right"</span>
+        },
+        <span class="hljs-attr">"SUBMIT_JOB"</span>: {
+            <span class="hljs-attr">"windows"</span>: <span class="hljs-string">"ctrl+s"</span>,
+            <span class="hljs-attr">"osx"</span>: <span class="hljs-string">"command+s"</span>
+        },
+        <span class="hljs-attr">"PLAY"</span>: {
+            <span class="hljs-attr">"windows"</span>: <span class="hljs-string">"ctrl+alt+p"</span>,
+            <span class="hljs-attr">"osx"</span>: <span class="hljs-string">"command+alt+p"</span>
+        },
+        <span class="hljs-attr">"PLAY_PREVIEW"</span>: {
+            <span class="hljs-attr">"windows"</span>: <span class="hljs-string">"ctrl+p"</span>,
+            <span class="hljs-attr">"osx"</span>: <span class="hljs-string">"command+p"</span>
+        },
+        <span class="hljs-attr">"MUTE"</span>: {
+            <span class="hljs-attr">"windows"</span>: <span class="hljs-string">"ctrl+m"</span>,
+            <span class="hljs-attr">"osx"</span>: <span class="hljs-string">"command+m"</span>
+        },
+        <span class="hljs-attr">"OUTPUT_TYPE"</span>: {
+            <span class="hljs-attr">"windows"</span>: <span class="hljs-string">"ctrl+y"</span>,
+            <span class="hljs-attr">"osx"</span>: <span class="hljs-string">"command+y"</span>
+        },
+        <span class="hljs-attr">"CLEAN_JOB"</span>: {
+            <span class="hljs-attr">"windows"</span>: <span class="hljs-string">"ctrl+alt+d"</span>,
+            <span class="hljs-attr">"osx"</span>: <span class="hljs-string">"command+alt+backspace"</span>
+        },
+        <span class="hljs-attr">"OPEN_ADVANCED_SETTINGS"</span>: {
+            <span class="hljs-attr">"windows"</span>: <span class="hljs-string">"ctrl+."</span>,
+            <span class="hljs-attr">"osx"</span>: <span class="hljs-string">"command+."</span>
+        },
+        <span class="hljs-attr">"CLOSE_MODAL"</span>: <span class="hljs-string">"escape"</span>,
+        <span class="hljs-attr">"REMOVE_ASSET"</span>: {
+            <span class="hljs-attr">"windows"</span>: <span class="hljs-string">"ctrl+d"</span>,
+            <span class="hljs-attr">"osx"</span>: <span class="hljs-string">"command+backspace"</span>
+        },
+        <span class="hljs-attr">"ZOOM_LEFT_LESS"</span>: {
+            <span class="hljs-attr">"windows"</span>: <span class="hljs-string">"ctrl+shift+["</span>,
+            <span class="hljs-attr">"osx"</span>: <span class="hljs-string">"command+shift+["</span>
+        },
+        <span class="hljs-attr">"ZOOM_LEFT_MORE"</span>: {
+            <span class="hljs-attr">"windows"</span>: <span class="hljs-string">"ctrl+["</span>,
+            <span class="hljs-attr">"osx"</span>: <span class="hljs-string">"command+["</span>
+        },
+        <span class="hljs-attr">"ZOOM_RIGHT_LESS"</span>: {
+            <span class="hljs-attr">"windows"</span>: <span class="hljs-string">"ctrl+shift+]"</span>,
+            <span class="hljs-attr">"osx"</span>: <span class="hljs-string">"command+shift+]"</span>
+        },
+        <span class="hljs-attr">"ZOOM_RIGHT_MORE"</span>: {
+           <span class="hljs-attr">"windows"</span>: <span class="hljs-string">"ctrl+]"</span>,
+            <span class="hljs-attr">"osx"</span>: <span class="hljs-string">"command+]"</span>
+        }
+    }
+}
+</code></pre>
+
+    </div>
+  </body>
+</html>
